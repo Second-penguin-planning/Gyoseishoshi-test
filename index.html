@@ -2,21 +2,28 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=210mm, initial-scale=1.0">
 <title>セコンドペンギン企画 建設・運輸チラシ</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html {
+    width: 210mm;
+    background: #fff;
+  }
+
   body {
-    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
     width: 210mm;
     min-height: 297mm;
     margin: 0 auto;
     background: #fff;
     font-size: 8.5pt;
     color: #222;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
   }
 
   :root {
@@ -28,6 +35,43 @@
     --lightgray:#F4F4F4;
     --white:    #FFFFFF;
     --text:     #222222;
+  }
+
+  /* PDF/印刷安定化 */
+  img {
+    display: block;
+    max-width: 100%;
+    border: 0;
+    image-rendering: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .header,
+  .section,
+  .footer,
+  .job-bar,
+  .divider,
+  .divider-thin,
+  .price-box,
+  .stat-row,
+  .support-grid,
+  .industry-badges,
+  .footer-body,
+  .qr-area,
+  .penguin-box,
+  .strength-item,
+  .support-item,
+  .stat-card,
+  .photo-placeholder,
+  .two-col,
+  .col-left,
+  .col-right {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   /* ===== ヘッダー ===== */
@@ -130,6 +174,8 @@
   .two-col {
     display: flex;
     gap: 0;
+    width: 100%;
+    align-items: stretch;
   }
   .col-left  { width: 55%; }
   .col-right { width: 45%; }
@@ -226,6 +272,8 @@
     font-size: 9pt;
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -330,6 +378,7 @@
     text-align: center;
     margin-bottom: 5px;
     border: 2px dashed rgba(255,255,255,0.3);
+    overflow: hidden;
   }
 
   .quality-list {
@@ -512,14 +561,14 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 2px;
-    padding: 2px; /* QRの周りに少し余白を設けてスッキリさせる */
+    padding: 2px;
     overflow: hidden;
   }
   .qr-box img {
-    width: 100%;    /* 枠いっぱいに広げる */
-    height: 100%;   /* 枠いっぱいに広げる */
+    width: 100%;
+    height: 100%;
     display: block;
-    object-fit: contain; /* アスペクト比を維持して収める */
+    object-fit: contain;
   }
   .qr-label {
     font-size: 5.5pt;
@@ -539,9 +588,98 @@
     margin: 0 12px;
   }
 
+  /* ===== PDF出力安定化 ===== */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
   @media print {
-    body { margin: 0; width: 210mm; }
-    @page { size: A4; margin: 0; }
+    html, body {
+      width: 210mm !important;
+      min-width: 210mm !important;
+      max-width: 210mm !important;
+      height: auto !important;
+      min-height: 297mm !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #fff !important;
+      overflow: visible !important;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    .header,
+    .header::before,
+    .header::after,
+    .header-bg-pattern,
+    .issues,
+    .strengths,
+    .quality,
+    .support,
+    .price-box,
+    .job-bar,
+    .footer,
+    .divider,
+    .divider-thin,
+    .field-tag,
+    .strength-num,
+    .penguin-box,
+    .balloon,
+    .stat-card,
+    .support-item,
+    .recommended,
+    .qr-box,
+    .industry-badge,
+    .job-tag,
+    .footer-top .free {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    .header,
+    .job-bar,
+    .two-col,
+    .support,
+    .footer,
+    .industry-badges,
+    .stat-row,
+    .support-grid,
+    .footer-body,
+    .contact-grid,
+    .qr-area,
+    .price-box,
+    .photo-placeholder {
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
+    }
+
+    img, svg, canvas {
+      max-width: 100% !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+
+    a,
+    a:visited {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
   }
 </style>
 </head>
