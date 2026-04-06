@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>セコンドペンギン企画 チラシ</title>
+<title>セコンドペンギン企画 建設・運輸チラシ</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 
@@ -19,19 +19,20 @@
     color: #222;
   }
 
-  /* ===== カラー変数 ===== */
   :root {
-    --navy:   #0D2B55;
-    --orange: #F4801A;
-    --yellow: #FFFBE6;
-    --white:  #FFFFFF;
-    --gray:   #F5F5F5;
-    --text:   #222222;
+    --charcoal: #2B2D2F;
+    --red:      #C0392B;
+    --gold:     #D4A017;
+    --lightgold:#FFF8E1;
+    --steel:    #4A5568;
+    --lightgray:#F4F4F4;
+    --white:    #FFFFFF;
+    --text:     #222222;
   }
 
   /* ===== ヘッダー ===== */
   .header {
-    background: var(--navy);
+    background: var(--charcoal);
     color: var(--white);
     padding: 10px 16px 8px;
     position: relative;
@@ -42,44 +43,89 @@
     position: absolute;
     top: 0; right: 0;
     width: 6px; height: 100%;
-    background: var(--orange);
+    background: var(--red);
   }
-  .header-top {
-    font-size: 8pt;
-    color: #aac4e8;
-    margin-bottom: 3px;
-    letter-spacing: 0.05em;
+  .header::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 6px;
+    width: 3px; height: 100%;
+    background: var(--gold);
   }
-  .header-catch {
-    font-size: 14.5pt;
-    font-weight: 900;
-    line-height: 1.3;
+  /* 背景の斜線テクスチャ（工事現場感） */
+  .header-bg-pattern {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(255,255,255,0.015) 18px,
+      rgba(255,255,255,0.015) 20px
+    );
+    pointer-events: none;
+  }
+  .header-inner { position: relative; z-index: 1; }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 2px;
     margin-bottom: 4px;
+    letter-spacing: 0.08em;
   }
-  .header-catch span { color: var(--orange); }
   .header-sub {
     font-size: 8.5pt;
     font-weight: 700;
-    color: #FFD580;
-    border: 1px solid #FFD580;
+    color: var(--gold);
+    border: 1px solid var(--gold);
     display: inline-block;
     padding: 2px 8px;
     border-radius: 2px;
     margin-bottom: 5px;
   }
   .header-title {
-    font-size: 13pt;
+    font-size: 14pt;
     font-weight: 900;
-    line-height: 1.4;
+    line-height: 1.35;
     margin-bottom: 4px;
   }
-  .header-title span { color: var(--orange); }
+  .header-title span { color: var(--gold); }
+  .header-title em {
+    font-style: normal;
+    color: var(--red);
+    border-bottom: 2px solid var(--red);
+  }
   .header-desc {
     font-size: 7.5pt;
-    line-height: 1.6;
-    color: #ccd9ec;
+    line-height: 1.65;
+    color: #bbb;
   }
-  .header-desc strong { color: #FFD580; font-weight: 700; }
+  .header-desc strong { color: var(--gold); font-weight: 700; }
+
+  /* ===== 産業バッジ ===== */
+  .industry-badges {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .industry-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 7pt;
+    color: #ddd;
+  }
+  .industry-badge .icon { font-size: 10pt; }
+  .industry-badge strong { color: var(--gold); }
 
   /* ===== 2カラムレイアウト ===== */
   .two-col {
@@ -96,8 +142,8 @@
   .section-title {
     font-size: 9pt;
     font-weight: 900;
-    color: var(--navy);
-    border-left: 4px solid var(--orange);
+    color: var(--charcoal);
+    border-left: 4px solid var(--red);
     padding-left: 6px;
     margin-bottom: 6px;
     line-height: 1.3;
@@ -114,12 +160,6 @@
     background: var(--white);
     border-bottom: 1px solid #e0e0e0;
   }
-  .issues-q {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
   .check-list {
     list-style: none;
     margin-bottom: 5px;
@@ -131,23 +171,48 @@
     position: relative;
   }
   .check-list li::before {
-    content: '☑';
-    color: var(--orange);
+    content: '⚠';
+    color: var(--red);
     position: absolute;
     left: 0;
-    font-size: 8pt;
+    font-size: 7.5pt;
   }
   .issues-body {
     font-size: 7pt;
     line-height: 1.65;
     color: #333;
   }
-  .issues-body strong { color: var(--navy); font-weight: 700; }
+  .issues-body strong { color: var(--charcoal); font-weight: 700; }
+
+  /* 業種タグ */
+  .field-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-bottom: 5px;
+  }
+  .field-tag {
+    font-size: 6.5pt;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .field-tag.const {
+    background: #FDECEA;
+    color: var(--red);
+    border: 1px solid #f5b8b2;
+  }
+  .field-tag.trans {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #a5d6a7;
+  }
 
   /* ===== 強みセクション ===== */
   .strengths {
-    background: var(--yellow);
-    border-bottom: 1px solid #e8e0b0;
+    background: var(--lightgold);
+    border-bottom: 1px solid #e8d88a;
   }
   .strength-item {
     display: flex;
@@ -156,7 +221,7 @@
     align-items: flex-start;
   }
   .strength-num {
-    background: var(--orange);
+    background: var(--red);
     color: white;
     font-weight: 900;
     font-size: 9pt;
@@ -172,7 +237,7 @@
   .strength-text h4 {
     font-size: 7.5pt;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--charcoal);
     margin-bottom: 1px;
   }
   .strength-text p {
@@ -186,7 +251,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #e8f0fb;
+    background: #e8eaec;
     border-radius: 6px;
     padding: 5px 8px;
     margin-top: 5px;
@@ -198,12 +263,12 @@
   }
   .balloon {
     background: white;
-    border: 1.5px solid var(--navy);
+    border: 1.5px solid var(--charcoal);
     border-radius: 8px;
     padding: 4px 8px;
     font-size: 6.5pt;
     line-height: 1.5;
-    color: var(--navy);
+    color: var(--charcoal);
     font-weight: 500;
     position: relative;
   }
@@ -213,7 +278,7 @@
     left: -8px; top: 50%;
     transform: translateY(-50%);
     border: 5px solid transparent;
-    border-right-color: var(--navy);
+    border-right-color: var(--charcoal);
   }
   .balloon::after {
     content: '';
@@ -236,7 +301,7 @@
   }
   .stat-card {
     flex: 1;
-    background: var(--navy);
+    background: var(--charcoal);
     color: white;
     border-radius: 4px;
     padding: 5px 6px;
@@ -245,15 +310,16 @@
   .stat-card .num {
     font-size: 14pt;
     font-weight: 900;
-    color: var(--orange);
+    color: var(--gold);
     line-height: 1.1;
   }
   .stat-card .label {
     font-size: 6pt;
     line-height: 1.3;
   }
+
   .photo-placeholder {
-    background: linear-gradient(135deg, #0D2B55 0%, #1a4a8a 100%);
+    background: linear-gradient(135deg, #2B2D2F 0%, #4A5568 100%);
     border-radius: 4px;
     height: 38mm;
     display: flex;
@@ -267,6 +333,7 @@
     border: 2px dashed rgba(255,255,255,0.3);
   }
   .photo-placeholder .icon { font-size: 20pt; margin-bottom: 3px; }
+
   .quality-list {
     list-style: none;
   }
@@ -284,9 +351,9 @@
     left: 0;
     font-size: 7pt;
   }
-  .quality-list li strong { color: var(--navy); font-weight: 700; }
+  .quality-list li strong { color: var(--charcoal); font-weight: 700; }
   .quality-list li .highlight {
-    color: var(--orange);
+    color: var(--red);
     font-weight: 900;
   }
 
@@ -301,15 +368,15 @@
     margin-bottom: 5px;
   }
   .support-item {
-    background: var(--gray);
+    background: var(--lightgray);
     border-radius: 4px;
     padding: 4px 6px;
-    border-left: 3px solid var(--navy);
+    border-left: 3px solid var(--charcoal);
   }
   .support-item h5 {
     font-size: 7pt;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--charcoal);
     margin-bottom: 1px;
   }
   .support-item p {
@@ -319,15 +386,15 @@
   }
 
   .price-box {
-    border: 2px solid var(--orange);
+    border: 2px solid var(--gold);
     border-radius: 6px;
     padding: 6px 8px;
-    background: #FFF8F0;
+    background: var(--lightgold);
   }
   .price-box h4 {
     font-size: 8pt;
     font-weight: 900;
-    color: var(--orange);
+    color: #8B6914;
     margin-bottom: 4px;
     text-align: center;
   }
@@ -336,13 +403,13 @@
     border-collapse: collapse;
     font-size: 6.5pt;
   }
-  .price-table tr { border-bottom: 1px solid #f0d8b0; }
+  .price-table tr { border-bottom: 1px solid #e8d88a; }
   .price-table tr:last-child { border-bottom: none; }
   .price-table td { padding: 2.5px 4px; vertical-align: middle; }
   .price-table .plan { color: #333; font-weight: 500; }
-  .price-table .price { color: var(--orange); font-weight: 900; text-align: right; white-space: nowrap; }
+  .price-table .price { color: #8B6914; font-weight: 900; text-align: right; white-space: nowrap; }
   .price-table .recommended {
-    background: var(--orange);
+    background: var(--red);
     color: white;
     font-size: 5.5pt;
     padding: 1px 4px;
@@ -350,9 +417,36 @@
     white-space: nowrap;
   }
 
+  /* ===== 対応職種バー ===== */
+  .job-bar {
+    background: var(--charcoal);
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .job-bar-label {
+    font-size: 7pt;
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .job-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #ddd;
+    font-size: 6pt;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .job-tag.const { border-color: #f5b8b2; color: #f5b8b2; }
+  .job-tag.trans  { border-color: #a5d6a7; color: #a5d6a7; }
+
   /* ===== フッター ===== */
   .footer {
-    background: var(--navy);
+    background: var(--charcoal);
     color: var(--white);
     padding: 8px 14px;
   }
@@ -362,14 +456,14 @@
   }
   .footer-top .catch {
     font-size: 8pt;
-    color: #aac4e8;
+    color: #aaa;
     margin-bottom: 2px;
   }
   .footer-top .free {
     font-size: 10pt;
     font-weight: 900;
-    color: var(--orange);
-    border: 2px solid var(--orange);
+    color: var(--gold);
+    border: 2px solid var(--gold);
     display: inline-block;
     padding: 2px 16px;
     border-radius: 20px;
@@ -377,9 +471,8 @@
   }
   .footer-top .note {
     font-size: 6.5pt;
-    color: #aac4e8;
+    color: #aaa;
   }
-
   .footer-body {
     display: flex;
     gap: 10px;
@@ -389,7 +482,7 @@
   .footer-info .company {
     font-size: 8pt;
     font-weight: 700;
-    color: #FFD580;
+    color: var(--gold);
     margin-bottom: 3px;
   }
   .contact-grid {
@@ -400,9 +493,9 @@
   .contact-item {
     font-size: 6.5pt;
     line-height: 1.6;
-    color: #ccd9ec;
+    color: #bbb;
   }
-  .contact-item .icon { color: var(--orange); }
+  .contact-item .icon { color: var(--red); }
   .contact-item a { color: #7eb8f7; text-decoration: none; }
 
   .qr-area {
@@ -410,9 +503,7 @@
     gap: 8px;
     flex-shrink: 0;
   }
-  .qr-block {
-    text-align: center;
-  }
+  .qr-block { text-align: center; }
   .qr-box {
     width: 42px;
     height: 42px;
@@ -426,14 +517,14 @@
   }
   .qr-label {
     font-size: 5.5pt;
-    color: #aac4e8;
+    color: #aaa;
     text-align: center;
   }
 
   /* ===== 仕切り線 ===== */
   .divider {
     height: 3px;
-    background: linear-gradient(90deg, var(--orange), var(--navy));
+    background: linear-gradient(90deg, var(--red), var(--gold), var(--charcoal));
   }
   .divider-thin {
     height: 1px;
@@ -451,17 +542,53 @@
 
 <!-- ===== ヘッダー ===== -->
 <div class="header">
-  <div class="header-top">▶ 観光・サービス業界の「おもてなし」を止めてはいけない。</div>
-  <div class="header-sub">【人手不足に悩むホテル・旅館・飲食経営者様へ】</div>
-  <div class="header-title">人手不足を解消し、現場に活気を取り戻す<br>
-    <span>「外国人材活用」</span>の最適解</div>
-  <div class="header-desc">
-    観光産業の未来を創る「即戦力」と「安心」のパートナーシップを。<br>
-    <strong>「明るく、誠実。そしてホスピタリティ溢れる」フィリピン・インドネシアの優れた人材</strong>と、<br>
-    法務のプロによる伴走で、貴社のサービスを次ステージへ導きます。
+  <div class="header-bg-pattern"></div>
+  <div class="header-inner">
+    <div class="header-badge">▶ 建設業・運輸業 経営者様へ 緊急提言</div><br>
+    <div class="header-sub">【2号特定技能・技能実習の次の一手を、今すぐ確実に。】</div>
+    <div class="header-title">
+      現場の人手不足は、もはや<em>「待ち」の経営</em>では解決しない。<br>
+      <span>「外国人即戦力」採用</span>で、工期・運行を守り切れ。
+    </div>
+    <div class="header-desc">
+      <strong>建設・土木・解体・造園・運送・倉庫・ドライバー不足</strong>に直面する現場へ。<br>
+      行政書士 × 元大使館スタッフ × 現地政府パートナーの三位一体で、<br>
+      <strong>コンプライアンス完全遵守・即戦力・定着率の高い人材</strong>を確実にお届けします。
+    </div>
+    <div class="industry-badges">
+      <div class="industry-badge">
+        <span class="icon">🏗️</span>
+        <div><strong>建設分野</strong><br>建築・土木・解体・塗装・造園</div>
+      </div>
+      <div class="industry-badge">
+        <span class="icon">🚛</span>
+        <div><strong>運輸・物流分野</strong><br>トラック・倉庫・港湾・荷役</div>
+      </div>
+      <div class="industry-badge">
+        <span class="icon">⚙️</span>
+        <div><strong>特定技能 1号・2号</strong><br>両方対応 / 技能実習移行支援</div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="divider"></div>
+
+<!-- ===== 対応職種バー ===== -->
+<div class="job-bar">
+  <span class="job-bar-label">🔧 建設：</span>
+  <span class="job-tag const">型枠施工</span>
+  <span class="job-tag const">鉄筋施工</span>
+  <span class="job-tag const">内装仕上げ</span>
+  <span class="job-tag const">土工</span>
+  <span class="job-tag const">塗装</span>
+  <span class="job-tag const">屋根・板金</span>
+  <span class="job-tag const">造園</span>
+  <span class="job-bar-label" style="margin-left:6px;">🚚 運輸：</span>
+  <span class="job-tag trans">トラックドライバー</span>
+  <span class="job-tag trans">倉庫内作業</span>
+  <span class="job-tag trans">港湾荷役</span>
+  <span class="job-tag trans">フォークリフト</span>
+</div>
 
 <!-- ===== 2カラム：課題＋強み（左）／ 人材の質（右） ===== -->
 <div class="two-col">
@@ -471,15 +598,28 @@
 
     <!-- 課題 -->
     <div class="section issues">
-      <div class="section-title">こんな危機感を抱いていませんか？</div>
+      <div class="section-title">現場のリアルな「危機」、直視してください</div>
+
+      <div class="field-tags">
+        <span class="field-tag const">🏗️ 建設の悩み</span>
+      </div>
       <ul class="check-list">
-        <li>人手が足りず、予約を制限せざるを得ない</li>
-        <li>現場が疲弊し、自慢のおもてなしが疎かになっている</li>
+        <li>職人の高齢化・引退で現場の技術継承が止まっている</li>
+        <li>工期遅延が続き、受注しても利益が出せない</li>
       </ul>
+      <div class="field-tags" style="margin-top:5px;">
+        <span class="field-tag trans">🚛 運輸の悩み</span>
+      </div>
+      <ul class="check-list" style="margin-bottom:5px;">
+        <li>ドライバー不足で配送ルートを減らさざるを得ない</li>
+        <li>2024年問題で残業規制が厳しくなり更に人手が足りない</li>
+      </ul>
+
       <p class="issues-body">
-        私たちは、単なる人材紹介会社ではありません。<br>
-        行政書士としての<strong>「法務的信頼」</strong>と、現地政府・教育機関との<strong>「外交的パイプ」</strong>を武器に、
-        貴社のコンプライアンスを守り抜き、即戦力となる人材を「線」で支える<strong>専門家集団</strong>です。
+        私たちは、<strong>建設キャリアアップシステム（CCUS）</strong>や
+        <strong>運輸業特有の免許・資格要件</strong>を熟知した専門家として、
+        法的リスクをゼロに近づけながら<strong>コンプライアンス完全準拠の採用</strong>を実現します。<br>
+        また、特定技能2号への移行支援により、<strong>長期的な戦力確保</strong>が可能です。
       </p>
     </div>
 
@@ -489,36 +629,39 @@
     <div class="section strengths">
       <div class="section-title">
         徳永良雄の圧倒的な強み
-        <span class="sub">なぜ、私たちの紹介は「質」が違うのか</span>
+        <span class="sub">建設・運輸に特化した「法務×現地ネットワーク」</span>
       </div>
 
-      <p style="font-size:6.5pt;color:#555;margin-bottom:6px;">代表の徳永良雄は、<strong>31年間の公務員経験</strong>と国際協力の最前線で培った独自ネットワークを保有。<br>他の業者には真似できない<strong>3つの信頼の柱</strong>があります。</p>
+      <p style="font-size:6.5pt;color:#555;margin-bottom:6px;">
+        代表の徳永良雄は<strong>31年間の公務員経験</strong>と現地政府との外交的パイプを持ち、<br>
+        建設・運輸分野に不可欠な<strong>資格・免許・安全教育</strong>への深い理解で差別化。
+      </p>
 
       <div class="strength-item">
         <div class="strength-num">①</div>
         <div class="strength-text">
-          <h4>🌏 日本大使館・現地政府派遣の「外交的パイプ」</h4>
-          <p>在インドネシア日本大使館勤務経験、フィリピン政府への専門家派遣実績。現地の動向や制度の深部まで熟知。</p>
+          <h4>🌏 大使館・現地政府派遣の「外交的パイプ」</h4>
+          <p>在インドネシア日本大使館勤務、フィリピン政府への専門家派遣実績。現地の職業訓練機関・TESDA認証校と直接提携。建設・運輸分野の人材供給源を複数確保。</p>
         </div>
       </div>
       <div class="strength-item">
         <div class="strength-num">②</div>
         <div class="strength-text">
-          <h4>⚖️ 行政書士の法務知見 × 31年の公務員実務</h4>
-          <p>入管業務（ビザ申請）のプロフェッショナル。複雑な特定技能の手続きを、行政実務の裏側まで知り尽くした知見でスムーズに完結。</p>
+          <h4>⚖️ 行政書士 × 入管のプロ × 建設CCUS対応</h4>
+          <p>特定技能ビザ申請・技能実習から特定技能への移行・CCUS登録支援まで完全代行。2024年問題対応の運輸分野でも、法令遵守プランを設計します。</p>
         </div>
       </div>
       <div class="strength-item">
         <div class="strength-num">③</div>
         <div class="strength-text">
-          <h4>🗣️ 言語と文化の壁を壊す「現場目線」</h4>
-          <p>ビジネス英語・中級インドネシア語を操り、現地で直接指導した経験。外国人の「困りごと」を肌で理解しているからこそ、ミスマッチのないマッチングを実現。</p>
+          <h4>🔧 「安全第一」の現場教育を日本語で徹底</h4>
+          <p>KY活動・ヒヤリハット・現場ルール教育を入国前から開始。ビジネス英語・中級インドネシア語で直接指導できる代表が、現地で安全意識を叩き込みます。</p>
         </div>
       </div>
 
       <div class="penguin-box">
         <div class="penguin-icon">🐧</div>
-        <div class="balloon">複雑な入管手続きは、<br>法務のプロである僕たちに<br>全部任せてくださいね！</div>
+        <div class="balloon">CCUSの登録も、技能実習から<br>特定技能への切り替えも、<br>全部まとめて対応しますよ！</div>
       </div>
     </div>
 
@@ -531,10 +674,9 @@
     <div class="section quality">
       <div class="section-title">
         圧倒的な「人材の質」と「安全性」
-        <span class="sub">失踪率0.2%の誇り</span>
+        <span class="sub">失踪率0.2%の現場即戦力</span>
       </div>
 
-      <!-- 統計カード -->
       <div class="stat-row">
         <div class="stat-card">
           <div class="num">80%</div>
@@ -550,21 +692,21 @@
         </div>
       </div>
 
-      <!-- 写真プレースホルダー -->
       <div class="photo-placeholder">
         <div class="icon">📸</div>
-        <div>OWJLCの活気ある授業風景<br>・笑顔の候補者たちの写真<br><span style="font-size:5.5pt;opacity:0.7;">（実際の写真に差し替えてください）</span></div>
+        <div>現場研修・安全教育の様子<br>・ヘルメット着用訓練<br>・倉庫フォークリフト実習<br><span style="font-size:5.5pt;opacity:0.7;">（実際の写真に差し替えてください）</span></div>
       </div>
 
       <ul class="quality-list">
-        <li><strong>提携校 OWJLC</strong>（フィリピン）<br>18教室・360名収容のTESDA認証校。会話重視の教材で「現場で動ける」人材を育成。</li>
-        <li><span class="highlight">失踪率わずか0.2%</span>を実現<br>フィリピンDMW/MWOの厳格な管理体制遵守と手厚いフォロー。</li>
-        <li><strong>内田クレペリン検査</strong>を導入<br>日本の鉄道運転士免許取得にも使われる適性検査。メンタル面でも安定した「サービス業向き人材」を選抜。</li>
+        <li><strong>提携校 OWJLC</strong>（フィリピン）<br>TESDA認証・18教室360名収容。<strong>建設・運輸向けの職業訓練コース</strong>を設置。現場用語・安全教育を入国前から実施。</li>
+        <li><span class="highlight">失踪率わずか0.2%</span><br>フィリピンDMW/MWO管理体制の厳格遵守。生活面の手厚いフォローで定着率を維持。</li>
+        <li><strong>内田クレペリン検査</strong>を導入<br>危険を伴う作業・長距離運転に必要な<strong>「注意力・集中力・安定性」</strong>を科学的に選抜。安全に直結する適性検査を活用。</li>
+        <li><strong>免許・資格の事前確認</strong><br>フォークリフト・玉掛け・クレーン等の資格保有状況を照合。入国後すぐ現場投入できる人材を優先選定。</li>
       </ul>
 
       <div class="penguin-box" style="margin-top:4px;">
         <div class="penguin-icon">🐧</div>
-        <div class="balloon">フィリピンの子たちは本当に<br>お年寄りに優しくて、<br>現場が明るくなりますよ！</div>
+        <div class="balloon">現場の安全は最優先！<br>入国前から「安全教育」を<br>しっかり叩き込んでいます。</div>
       </div>
     </div>
 
@@ -581,24 +723,24 @@
     <div style="flex:1;">
       <div class="section-title">
         一気通貫のフルサポートモデル
-        <span class="sub">採用から定着まで一つの窓口で完結</span>
+        <span class="sub">採用準備から現場定着・資格取得まで一つの窓口で完結</span>
       </div>
       <div class="support-grid">
         <div class="support-item">
           <h5>📋 採用・法務代行</h5>
-          <p>ニーズに合った人材選定、在留資格申請・現地手続きの完全代行。</p>
+          <p>特定技能ビザ申請・CCUS登録・技能実習からの移行手続きを完全代行。建設・運輸特有の要件に完全対応。</p>
         </div>
         <div class="support-item">
-          <h5>🏠 生活セットアップ</h5>
-          <p>空港送迎、住居手配、役所・銀行・携帯などの煩雑な手続き支援。</p>
+          <h5>🏠 入国・生活セットアップ</h5>
+          <p>空港送迎、住居手配、役所・銀行・携帯手続き。寮の紹介から現場へのアクセス確認まで。</p>
         </div>
         <div class="support-item">
-          <h5>📈 定着・ステップアップ</h5>
-          <p>定期面談 ＋ 就労しながらN3/N2を目指せる「オンデマンド日本語コース」。</p>
+          <h5>🔧 現場適応・安全教育</h5>
+          <p>KY活動・ヒヤリハット教育の日本語サポート。資格取得（フォーク・玉掛け等）の受験支援も対応。</p>
         </div>
         <div class="support-item">
-          <h5>🤝 顧問サービス</h5>
-          <p>外国人雇用全般の相談窓口。制度改正にも即時対応。</p>
+          <h5>🤝 顧問・緊急対応</h5>
+          <p>外国人雇用全般の相談窓口。労務トラブル・在留資格更新・制度改正への即時対応。</p>
         </div>
       </div>
     </div>
@@ -611,12 +753,12 @@
             <td class="plan">特定技能サポートプラン（基本）</td>
             <td class="price">月額 15,000円〜/人</td>
           </tr>
-          <tr style="background:#fff3e0;">
+          <tr style="background:rgba(192,57,43,0.06);">
             <td class="plan">
               <span class="recommended">推奨</span>
-              教育付きサポートプラン（日本語コース付）
+              安全教育付きサポートプラン（日本語＋現場研修）
             </td>
-            <td class="price" style="color:#c05800;">月額 20,000円〜/人</td>
+            <td class="price" style="color:var(--red);">月額 20,000円〜/人</td>
           </tr>
           <tr>
             <td class="plan">入国・採用準備費用</td>
@@ -627,11 +769,15 @@
             <td class="price">50,000円〜</td>
           </tr>
           <tr>
+            <td class="plan">CCUS登録・資格確認費用</td>
+            <td class="price">30,000円〜/人</td>
+          </tr>
+          <tr>
             <td class="plan">外国人雇用アドバイザー（顧問）</td>
             <td class="price">月額 30,000円〜</td>
           </tr>
         </table>
-        <p style="font-size:6pt;color:#888;text-align:center;margin-top:4px;">貴社の規模に合わせて最適なプランをご提案します。</p>
+        <p style="font-size:6pt;color:#888;text-align:center;margin-top:4px;">貴社の規模・職種・人数に合わせて最適なプランをご提案します。</p>
       </div>
     </div>
 
@@ -643,8 +789,8 @@
 <!-- ===== フッター ===== -->
 <div class="footer">
   <div class="footer-top">
-    <p class="catch">「制度がよくわからない」「まずは適性を見てみたい」といったご相談も大歓迎です。</p>
-    <div class="free">✨ 初回相談無料・全国オンライン対応 ✨</div><br>
+    <p class="catch">「まず何から始めればいいか分からない」「現場に合う人材か見極めたい」といったご相談も大歓迎です。</p>
+    <div class="free">🔧 初回相談無料・全国オンライン対応 🔧</div><br>
     <span class="note">通常24時間以内に回答いたします。</span>
   </div>
 
@@ -658,7 +804,7 @@
           神戸ファッションマート 4N-07-01
         </div>
         <div class="contact-item">
-          <span class="icon">📞</span> <strong style="color:#FFD580;font-size:8pt;">070-9192-2524</strong><br>（担当直通）<br>
+          <span class="icon">📞</span> <strong style="color:var(--gold);font-size:8pt;">070-9192-2524</strong><br>（担当直通）<br>
           <span class="icon">✉️</span> <a href="mailto:info@second-penguin.com">info@second-penguin.com</a><br>
           <span class="icon">🌐</span> <a href="https://second-penguin.com">second-penguin.com</a><br>
           <span style="margin-left:12px;"><a href="https://tokunaga-gyosei.jp">tokunaga-gyosei.jp</a></span>
