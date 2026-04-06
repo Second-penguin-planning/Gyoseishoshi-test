@@ -52,7 +52,6 @@
     width: 3px; height: 100%;
     background: var(--gold);
   }
-  /* 背景の斜線テクスチャ（工事現場感） */
   .header-bg-pattern {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -332,7 +331,6 @@
     margin-bottom: 5px;
     border: 2px dashed rgba(255,255,255,0.3);
   }
-  .photo-placeholder .icon { font-size: 20pt; margin-bottom: 3px; }
 
   .quality-list {
     list-style: none;
@@ -498,6 +496,7 @@
   .contact-item .icon { color: var(--red); }
   .contact-item a { color: #7eb8f7; text-decoration: none; }
 
+  /* ----- QRコード修正箇所 ----- */
   .qr-area {
     display: flex;
     gap: 8px;
@@ -512,13 +511,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18pt;
     margin-bottom: 2px;
+    padding: 2px; /* QRの周りに少し余白を設けてスッキリさせる */
+    overflow: hidden;
+  }
+  .qr-box img {
+    width: 100%;    /* 枠いっぱいに広げる */
+    height: 100%;   /* 枠いっぱいに広げる */
+    display: block;
+    object-fit: contain; /* アスペクト比を維持して収める */
   }
   .qr-label {
     font-size: 5.5pt;
     color: #aaa;
     text-align: center;
+    line-height: 1.2;
   }
 
   /* ===== 仕切り線 ===== */
@@ -540,7 +547,6 @@
 </head>
 <body>
 
-<!-- ===== ヘッダー ===== -->
 <div class="header">
   <div class="header-bg-pattern"></div>
   <div class="header-inner">
@@ -573,7 +579,6 @@
 </div>
 <div class="divider"></div>
 
-<!-- ===== 対応職種バー ===== -->
 <div class="job-bar">
   <span class="job-bar-label">🔧 建設：</span>
   <span class="job-tag const">型枠施工</span>
@@ -590,13 +595,10 @@
   <span class="job-tag trans">フォークリフト</span>
 </div>
 
-<!-- ===== 2カラム：課題＋強み（左）／ 人材の質（右） ===== -->
 <div class="two-col">
 
-  <!-- ===== 左カラム ===== -->
   <div class="col-left">
 
-    <!-- 課題 -->
     <div class="section issues">
       <div class="section-title">現場のリアルな「危機」、直視してください</div>
 
@@ -625,7 +627,6 @@
 
     <div class="divider-thin"></div>
 
-    <!-- 強み -->
     <div class="section strengths">
       <div class="section-title">
         徳永良雄の圧倒的な強み
@@ -665,12 +666,8 @@
       </div>
     </div>
 
-  </div><!-- /col-left -->
+  </div><div class="col-right" style="border-left: 2px solid #e0e0e0;">
 
-  <!-- ===== 右カラム ===== -->
-  <div class="col-right" style="border-left: 2px solid #e0e0e0;">
-
-    <!-- 人材の質 -->
     <div class="section quality">
       <div class="section-title">
         圧倒的な「人材の質」と「安全性」
@@ -693,8 +690,7 @@
       </div>
 
       <div class="photo-placeholder">
-     
-        <div><img src="授業風景.png" style="width:100%;height:38mm;object-fit:cover;border-radius:4px;"></div>
+        <img src="授業風景.png" style="width:100%;height:38mm;object-fit:cover;border-radius:4px;">
       </div>
 
       <ul class="quality-list">
@@ -710,13 +706,8 @@
       </div>
     </div>
 
-  </div><!-- /col-right -->
+  </div></div><div class="divider"></div>
 
-</div><!-- /two-col -->
-
-<div class="divider"></div>
-
-<!-- ===== サポート・料金 ===== -->
 <div class="section support">
   <div style="display:flex;gap:10px;">
 
@@ -786,7 +777,6 @@
 
 <div class="divider"></div>
 
-<!-- ===== フッター ===== -->
 <div class="footer">
   <div class="footer-top">
     <p class="catch">「まず何から始めればいいか分からない」「現場に合う人材か見極めたい」といったご相談も大歓迎です。</p>
@@ -814,11 +804,11 @@
 
     <div class="qr-area">
       <div class="qr-block">
-        <div class="qr-box"><img src="QR_LINE.png"></div>
+        <div class="qr-box"><img src="QR_LINE.png" alt="LINE"></div>
         <div class="qr-label">LINE<br>お問い合わせ</div>
       </div>
       <div class="qr-block">
-        <div class="qr-box"><img src="QR_second_penguin.png"></div>
+        <div class="qr-box"><img src="QR_second_penguin.png" alt="WEB"></div>
         <div class="qr-label">WEB<br>サイト</div>
       </div>
     </div>
